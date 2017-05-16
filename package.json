@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/peruggia/hidrometro#readme",
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "browserify": "^14.3.0",
     "express": "^4.15.2",
-    "mysql": "^2.13.0"
+    "mysql": "^2.13.0",
+    "node-sass": "^4.5.2",
+    "pug": "^2.0.0-rc.1"
   }
 }

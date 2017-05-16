@@ -1,12 +1,16 @@
 let express = require('express'),
   mysql = require('mysql')
-  app = express(),
+  app = express().set('view engine', 'pug'),
   connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'girafa',
     database: 'water'
   });
+
+app.get('/', function (req, res) {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+});
 
 app.get('/consumo/:quantidade', function (req, res) {
   //res.send('Hello World!');
