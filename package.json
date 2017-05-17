@@ -4,6 +4,7 @@
   "description": "Gerenciador de gastos de água",
   "main": "index.js",
   "scripts": {
+    "start": "node start.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
