@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .row.justify-content-md-center.mt-4
+    .col-5
+      img(src="/images/moca-transparente.png" class="d-block mx-auto mb-4 mt-5" width="400")
+      form.p-3.bg-faded.rounded
+        .form-group
+          label(for="username") Usuário
+          input(type="text" class="form-control" id="username" name="username" placeholder="Digite o usuário")
+        .form-group
+          label(for="password") Senha
+          input(type="password" class="form-control" id="password" name="password" placeholder="Digite a senha")
+        a(href="/users" class="btn btn-primary") Entrar
