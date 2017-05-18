@@ -1,0 +1,40 @@
+extends layout_page
+
+block content
+  .row.justify-content-md-center.mt-4
+    .col
+      h1.mb-3 Conta de Água - Incluir
+  form(method="post")
+  .row.mt-3.p-3.bg-faded.rounded
+      - var code = '';
+      .col-4
+        .form-group
+          - code = 'codigo';
+          label(for=code) Código
+          input(type="text" class="form-control" id=code name=code placeholder="Ex: ACFE394")
+        .form-group
+          - code = 'mes_referencia';
+          label(for=code) Mês de Referência
+          input(type="text" class="form-control" id=code name=code placeholder="Ex: janeiro")
+        .form-group
+          - code = 'leitura_anterior';
+          label(for=code) Data da Leitura Anterior
+          input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
+      .col-4
+        .form-group
+          - code = 'leitura_atual';
+          label(for=code) Data da Leitura Atual
+          input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
+        .form-group
+          - code = 'vencimento';
+          label(for=code) Data de Vencimento
+          input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
+        .form-group
+          - code = 'valor';
+          label(for=code) Valor da Conta
+          input(type="text" class="form-control" id=code name=code placeholder="Ex: R$ 43,23")
+        
+        a(href="/conta_agua" class="btn btn-secondary mr-2") Voltar
+        button(type="submit" class="btn btn-primary")
+          img(src="/images/icon/glyphicons-445-floppy-saved.png" width="18" class="mr-2 d-inline-block align-top filter-invert")
+          | Salvar
