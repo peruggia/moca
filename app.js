@@ -17,7 +17,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // Browserify
-app.use('js/app.js', browserify('./public/javascripts/app.min.js', {
+app.get('./js/', browserify('./public/javascripts/', {
+  cache: false,
   precompile: true
 }));
 

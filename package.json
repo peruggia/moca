@@ -4,17 +4,19 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "debug": "DEBUG=myapp:* npm start"
+    "dev": "concurrently --kill-others 'DEBUG=myapp:* npm start' 'watchify ./js/app.js -o ./public/javascripts/app.min.js'"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
     "browserify-middleware": "^7.1.0",
+    "concurrently": "^3.4.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "morgan": "~1.8.1",
     "node-sass-middleware": "0.9.8",
     "pug": "~2.0.0-beta11",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "watchify": "^3.9.0"
   }
 }
