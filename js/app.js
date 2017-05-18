@@ -1,1 +1,1 @@
-console.log('ok ok');
+require('./dashboard');

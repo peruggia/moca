@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "concurrently --kill-others 'DEBUG=myapp:* npm start' 'watchify ./js/app.js -o ./public/javascripts/app.min.js'"
+    "dev": "concurrently --kill-others 'DEBUG=myapp:* npm start' 'watchify ./js/app.js -o ./public/javascripts/app.min.js'",
+    "js": "watchify ./js/app.js -o ./public/javascripts/app.min.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
     "browserify-middleware": "^7.1.0",
+    "chart.js": "^2.5.0",
     "concurrently": "^3.4.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",

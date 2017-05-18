@@ -8,7 +8,8 @@ var sassMiddleware = require('node-sass-middleware');
 var browserify = require('browserify-middleware');
 
 var login = require('./routes/login');
-var users = require('./routes/users');
+var home = require('./routes/home');
+var contaAgua = require('./routes/conta_agua');
 
 var app = express();
 
@@ -37,7 +38,8 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', login);
-app.use('/users', users);
+app.use('/home', home);
+app.use('/conta_agua', contaAgua);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
