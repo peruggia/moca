@@ -1,0 +1,25 @@
+extends layout_page
+
+block content
+  .row.justify-content-md-center.mt-4
+    .col
+      h1.mb-3 Rateio
+      p
+        a.btn.btn-secondary(href="/conta_agua")
+          img(src="/images/icon/glyphicons-222-unshare.png" width="20" class="mr-2 d-inline-block align-top")
+          | Voltar
+      table.table.table-striped
+        thead.thead-inverse
+          tr
+            th Nome da Unidade
+            th Valor
+        tbody
+          tr
+            td Apartamento 201
+            td R$ 31,20
+          tr
+            td Apartamento 205
+            td R$ 54,90
+          tr
+            td Jardim
+            td R$ 25,50

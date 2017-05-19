@@ -8,5 +8,8 @@ router.get('/', function(req, res, next) {
 router.get('/incluir', function(req, res, next) {
   res.render('conta_agua_form');
 });
+router.get('/rateio/:contaAguaId', function(req, res, next) {
+  res.render('rateio');
+});
 
 module.exports = router;
