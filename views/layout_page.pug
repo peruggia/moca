@@ -16,19 +16,19 @@ html
               ul(class="navbar-nav mr-auto")
                 - var active = '';
                 - active = (page === 'home' ? 'active' : '');
-                li(class="nav-item" class!=active)
+                li(class="nav-item ml-2" class!=active)
                   a(class="nav-link" href="/home")
                     i.fa.fa-home.mr-1
                     | Home
                     span(class="sr-only") (current)
                 - active = (page === 'conta_agua' ? 'active' : '');
-                li(class="nav-item" class!=active)
+                li(class="nav-item ml-2" class!=active)
                   a(class="nav-link" href="/conta_agua")
                     i.fa.fa-tint.mr-1
                     | Conta de Água
                     span(class="sr-only") (current)
                 - active = (page === 'unidade' ? 'active' : '');
-                li(class="nav-item" class!=active)
+                li(class="nav-item ml-2" class!=active)
                   a(class="nav-link" href="/unidade")
                     i.fa.fa-building-o.mr-1
                     | Unidades

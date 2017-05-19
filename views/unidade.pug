@@ -1,0 +1,34 @@
+extends layout_page
+
+block content
+  .row.justify-content-md-center.mt-4
+    .col
+      h1.mb-3 Unidade
+      p
+        a.btn.btn-primary(href="/unidade/incluir")
+          i.fa.fa-plus-circle.mr-2
+          | Incluir Nova Unidade
+      table.table.table-striped
+        thead.thead-inverse
+          tr
+            th Nome
+            th Tipo
+            th Percentual de Rateio
+            th Responsável
+        tbody
+          tr
+            td Apartamento 201
+            td Apartamento
+            td 1.0
+            td José da Silva
+          tr
+            td Apartamento 204
+            td Apartamento
+            td 1.2
+            td Fulando Siqueira
+          tr
+            td Cobertura
+            td Apartamento
+            td 2.0
+            td Super Rico
+          
