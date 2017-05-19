@@ -7,32 +7,40 @@ block content
   form(method="post")
   .row.mt-3.p-3.bg-faded.rounded
       - var code = '';
-      .col-4
-        .form-group
+      .col
+        .form-group.row
+          - code = 'condominio';
+          label.col-sm-2.col-form-label.text-right(for=code) Condomínio
+          .col-sm-10
+            select(class="form-control" id=code name=code)
+              option(value='1234') Condomínio Vila da Praia
+        .form-group.row
           - code = 'codigo';
-          label(for=code) Código
-          input(type="text" class="form-control" id=code name=code placeholder="Ex: ACFE394")
-        .form-group
+          label.col-sm-2.col-form-label.text-right(for=code) Código
+          .col-sm-4
+            input(type="text" class="form-control" id=code name=code placeholder="Ex: ACFE394")
           - code = 'mes_referencia';
-          label(for=code) Mês de Referência
-          input(type="text" class="form-control" id=code name=code placeholder="Ex: janeiro")
-        .form-group
+          label.col-sm-2.col-form-label.text-right(for=code) Mês de Referência
+          .col-sm-4
+            input(type="text" class="form-control" id=code name=code placeholder="Ex: janeiro")
+        .form-group.row
           - code = 'leitura_anterior';
-          label(for=code) Data da Leitura Anterior
-          input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
-      .col-4
-        .form-group
+          label.col-sm-2.col-form-label.text-right(for=code) Data da Leitura Anterior
+          .col-sm-4
+            input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
           - code = 'leitura_atual';
-          label(for=code) Data da Leitura Atual
-          input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
-        .form-group
+          label.col-sm-2.col-form-label.text-right(for=code) Data da Leitura Atual
+          .col-sm-4
+            input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
+        .form-group.row
           - code = 'vencimento';
-          label(for=code) Data de Vencimento
-          input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
-        .form-group
+          label.col-sm-2.col-form-label.text-right(for=code) Data de Vencimento
+          .col-sm-4
+            input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
           - code = 'valor';
-          label(for=code) Valor da Conta
-          input(type="text" class="form-control" id=code name=code placeholder="Ex: R$ 43,23")
+          label.col-sm-2.col-form-label.text-right(for=code) Valor da Conta
+          .col-sm-4
+            input(type="text" class="form-control" id=code name=code placeholder="Ex: R$ 43,23")
         
         a(href="/conta_agua" class="btn btn-secondary mr-2") Voltar
         button(type="submit" class="btn btn-primary")
