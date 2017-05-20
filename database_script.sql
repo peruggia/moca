@@ -1,57 +1,102 @@
--- MySQL Workbench Forward Engineering
+CREATE SCHEMA IF NOT EXISTS moca DEFAULT CHARACTER SET utf8;
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+USE moca;
+SET foreign_key_checks = 0;
 
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
+-- CONSUMO
+DROP TABLE IF EXISTS consumo;
+CREATE TABLE consumo (
+	uidpk INT NOT NULL,
+	quantidade DOUBLE NOT NULL,
+	dt_criacao DATETIME NOT NULL,
+	fk_consumo_modulo_coletor INT NOT NULL,
+	fk_consumo_unidade INT NOT NULL,
+	PRIMARY KEY (uidPk)
+);
 
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `water` DEFAULT CHARACTER SET utf8 ;
-USE `water` ;
+-- MODULO COLETOR
+DROP TABLE IF EXISTS modulo_coletor;
+CREATE TABLE modulo_coletor (
+	uidpk INT NOT NULL,
+	nome VARCHAR(100) NOT NULL,
+	serial VARCHAR(30) NOT NULL,
+	situacao VARCHAR(30) NOT NULL,
+	dt_criacao DATETIME NOT NULL,
+	dt_modificacao DATETIME NOT NULL,
+	dt_ultimo_contato DATETIME NOT NULL,
+	fk_modulo_coletor_unidade INT NULL,
+	PRIMARY KEY (uidPk)
+);
 
--- -----------------------------------------------------
--- Table `modulo_coletor`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `modulo_coletor` ;
+-- CONDOMINIO
+DROP TABLE IF EXISTS condominio;
+CREATE TABLE condominio (
+	uidpk INT NOT NULL,
+	nome VARCHAR(100) NOT NULL,
+	dt_criacao DATETIME NOT NULL,
+	dt_modificacao DATETIME NOT NULL,
+	PRIMARY KEY (uidPk)
+);
 
-CREATE TABLE IF NOT EXISTS `modulo_coletor` (
-  `uidpk` INT NOT NULL AUTO_INCREMENT,
-  `serial` VARCHAR(32) NOT NULL,
-  `ativo` BIT(1) NOT NULL,
-  PRIMARY KEY (`uidpk`))
-ENGINE = InnoDB;
+-- CONTA_AGUA
+DROP TABLE IF EXISTS conta_agua;
+CREATE TABLE conta_agua (
+	uidpk INT NOT NULL,
+	mes_referencia TINYINT(1) NOT NULL,
+	dt_leitura_anterior DATETIME NOT NULL,
+	dt_fim_leitura DATETIME NOT NULL,
+	dt_ventimento DATETIME NOT NULL,
+	valor DOUBLE NOT NULL,
+	codigo VARCHAR(30) NOT NULL,
+	dt_criacao DATETIME NOT NULL,
+	dt_modificacao DATETIME NOT NULL,
+	fk_conta_agua_condominio INT NOT NULL,
+	PRIMARY KEY (uidPk)
+);
 
+-- RATEIO
+DROP TABLE IF EXISTS rateio;
+CREATE TABLE rateio (
+	uidpk INT NOT NULL,
+	valor DOUBLE NOT NULL,
+	dt_criacao DATETIME NOT NULL,
+	fk_rateio_conta_agua INT NOT NULL,
+	fk_rateio_unidade INT NOT NULL,
+	PRIMARY KEY (uidPk)
+);
 
--- -----------------------------------------------------
--- Table `consumo`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `consumo` ;
+-- UNIDADE
+DROP TABLE IF EXISTS unidade;
+CREATE TABLE unidade (
+	uidpk INT NOT NULL,
+	nome VARCHAR(100) NOT NULL,
+	tipo VARCHAR(50) NOT NULL,
+	percentual_rateio DOUBLE NOT NULL,
+	dt_criacao DATETIME NOT NULL,
+	dt_modificacao DATETIME NOT NULL,
+	fk_unidade_condominio INT NOT NULL,
+	PRIMARY KEY (uidPk)
+);
 
-CREATE TABLE IF NOT EXISTS `consumo` (
-  `uidpk` INT NOT NULL AUTO_INCREMENT,
-  `quantidade` DOUBLE NOT NULL,
-  `dt_inicio` DATETIME NOT NULL,
-  `dt_fim` DATETIME NOT NULL,
-  `modulo_coletor_id` INT NOT NULL,
-  PRIMARY KEY (`uidpk`, `modulo_coletor_id`),
-  INDEX `fk_consumo_modulo_coletor_idx` (`modulo_coletor_id` ASC),
-  CONSTRAINT `fk_consumo_modulo_coletor`
-    FOREIGN KEY (`modulo_coletor_id`)
-    REFERENCES `modulo_coletor` (`uidpk`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- CHAVES ESTRANGEIRAS
+-- consumo
+ALTER TABLE consumo ADD CONSTRAINT fk_consumo_modulo_coletor
+FOREIGN KEY (fk_consumo_modulo_coletor) REFERENCES modulo_coletor(uidpk);
+ALTER TABLE consumo ADD CONSTRAINT fk_consumo_unidade
+FOREIGN KEY (fk_consumo_unidade) REFERENCES unidade(uidpk);
 
+ALTER TABLE modulo_coletor ADD CONSTRAINT fk_modulo_coletor_unidade
+FOREIGN KEY (fk_modulo_coletor_unidade) REFERENCES unidade(uidpk);
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+ALTER TABLE conta_agua ADD CONSTRAINT fk_conta_agua_condominio
+FOREIGN KEY (fk_conta_agua_condominio) REFERENCES condominio(uidpk);
 
+ALTER TABLE rateio ADD CONSTRAINT fk_rateio_conta_agua
+FOREIGN KEY (fk_rateio_conta_agua) REFERENCES conta_agua(uidpk);
+ALTER TABLE rateio ADD CONSTRAINT fk_rateio_unidade
+FOREIGN KEY (fk_rateio_unidade) REFERENCES unidade(uidpk);
 
-INSERT INTO `water`.`modulo_coletor` (`serial`, `ativo`) VALUES ('0a9s809d8as0d9asd', 1);
-INSERT INTO `water`.`consumo` (`quantidade`, `dt_inicio`, `dt_fim`, `modulo_coletor_id`) VALUES ('10.3', NOW(), NOW(), 1);
+ALTER TABLE unidade ADD CONSTRAINT fk_unidade_condominio
+FOREIGN KEY (fk_unidade_condominio) REFERENCES condominio(uidpk);
+
+SET foreign_key_checks = 1;
