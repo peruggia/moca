@@ -15,15 +15,8 @@ block content
             th Nome
             th Estado
         tbody
-          tr
-            td ADFEG
-            td AP 01 - 001
-            td Ativo
-          tr
-            td AS83FC
-            td AP 01 - 002
-            td Perdido
-          tr
-            td FKMSHE
-            td AP 01 - 003
-            td Ativo
+          each coletor in coletores
+            tr
+              td=coletor.serial
+              td=coletor.nome
+              td=coletor.situacao

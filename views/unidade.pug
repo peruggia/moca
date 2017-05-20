@@ -14,21 +14,11 @@ block content
             th Nome
             th Tipo
             th Percentual de Rateio
-            th Responsável
+            th Condomínio
         tbody
-          tr
-            td Apartamento 201
-            td Apartamento
-            td 1.0
-            td José da Silva
-          tr
-            td Apartamento 204
-            td Apartamento
-            td 1.2
-            td Fulando Siqueira
-          tr
-            td Cobertura
-            td Apartamento
-            td 2.0
-            td Super Rico
-          
+          each unidade in unidades
+            tr
+              td=unidade.nome
+              td=unidade.tipo
+              td=unidade.percentual_rateio
+              td=unidade.condominio
