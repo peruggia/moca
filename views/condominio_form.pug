@@ -9,40 +9,39 @@ block content
       - var code = '';
       .col
         .form-group.row
-          - code = 'condominio';
-          label.col-sm-2.col-form-label.text-right(for=code) Condomínio
+          - code = 'nome';
+          label.col-sm-2.col-form-label.text-right(for=code) Nome
           .col-sm-10
-            select(class="form-control" id=code name=code)
-              option(value='1234') Condomínio Vila da Praia
+            input(type="text" class="form-control" id=code name=code placeholder="Ex: Praia Azul")
         .form-group.row
-          - code = 'codigo';
-          label.col-sm-2.col-form-label.text-right(for=code) Código
-          .col-sm-4
-            input(type="text" class="form-control" id=code name=code placeholder="Ex: ACFE394")
-          - code = 'mes_referencia';
-          label.col-sm-2.col-form-label.text-right(for=code) Mês de Referência
-          .col-sm-4
+          - code = 'endereco';
+          label.col-sm-2.col-form-label.text-right(for=code) Endereço
+          .col-sm-10
             input(type="text" class="form-control" id=code name=code placeholder="Ex: janeiro")
-        .form-group.row
-          - code = 'leitura_anterior';
-          label.col-sm-2.col-form-label.text-right(for=code) Data da Leitura Anterior
-          .col-sm-4
-            input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
-          - code = 'leitura_atual';
-          label.col-sm-2.col-form-label.text-right(for=code) Data da Leitura Atual
-          .col-sm-4
-            input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
-        .form-group.row
-          - code = 'vencimento';
-          label.col-sm-2.col-form-label.text-right(for=code) Data de Vencimento
-          .col-sm-4
-            input(type="text" class="form-control" id=code name=code placeholder="Ex: 01/02/2017")
-          - code = 'valor';
-          label.col-sm-2.col-form-label.text-right(for=code) Valor da Conta
-          .col-sm-4
-            input(type="text" class="form-control" id=code name=code placeholder="Ex: R$ 43,23")
+        h6 Unidades:
+        .js-unidades
+          .form-group.row
+            .col-sm-6
+              - code = 'unidade1';
+              select(class="form-control d-inline-block w-75" id=code name=code)
+                option(value='1234') AP 1003
+                option(value='1234') AP 205
+              button.btn.btn-danger.btn-sm.ml-2
+                i.fa.fa-trash
+          .form-group.row
+            .col-sm-6
+              - code = 'unidade2';
+              select(class="form-control d-inline-block w-75" id=code name=code)
+                option(value='1234') AP 1003
+                option(value='1234') AP 205
+              button.btn.btn-danger.btn-sm.ml-2
+                i.fa.fa-trash
+        button.btn.btn-link.mb-4
+          i.fa.fa-plus.mr-2
+          | Adicionar Unidade
+        br
         
-        a(href="/conta_agua" class="btn btn-secondary mr-2") Voltar
+        a(href="/condominio" class="btn btn-secondary mr-2") Voltar
         button(type="submit" class="btn btn-primary")
           i.fa.fa-floppy-o.mr-2
           | Salvar
