@@ -23,8 +23,9 @@ DROP TABLE IF EXISTS `condominio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `condominio` (
-  `uidpk` int(11) NOT NULL,
+  `uidpk` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
+  `endereco` varchar(200) NOT NULL,
   `dt_criacao` datetime NOT NULL,
   `dt_modificacao` datetime NOT NULL,
   PRIMARY KEY (`uidpk`)
@@ -37,7 +38,7 @@ CREATE TABLE `condominio` (
 
 LOCK TABLES `condominio` WRITE;
 /*!40000 ALTER TABLE `condominio` DISABLE KEYS */;
-INSERT INTO `condominio` VALUES (1,'Praia Azul','2017-05-20 19:24:00','2017-05-20 19:24:00');
+INSERT INTO `condominio` VALUES (1,'Praia Azul', 'Avenida Getúlio Vargas, 344','2017-05-20 19:24:00','2017-05-20 19:24:00');
 /*!40000 ALTER TABLE `condominio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,7 +50,7 @@ DROP TABLE IF EXISTS `consumo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `consumo` (
-  `uidpk` int(11) NOT NULL,
+  `uidpk` int(11) NOT NULL AUTO_INCREMENT,
   `quantidade` double NOT NULL,
   `dt_criacao` datetime NOT NULL,
   `fk_consumo_modulo_coletor` int(11) NOT NULL,
@@ -79,7 +80,7 @@ DROP TABLE IF EXISTS `conta_agua`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `conta_agua` (
-  `uidpk` int(11) NOT NULL,
+  `uidpk` int(11) NOT NULL AUTO_INCREMENT,
   `mes_referencia` tinyint(1) NOT NULL,
   `dt_leitura_anterior` datetime NOT NULL,
   `dt_fim_leitura` datetime NOT NULL,
@@ -112,7 +113,7 @@ DROP TABLE IF EXISTS `modulo_coletor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `modulo_coletor` (
-  `uidpk` int(11) NOT NULL,
+  `uidpk` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `serial` varchar(30) NOT NULL,
   `situacao` varchar(30) NOT NULL,
@@ -144,7 +145,7 @@ DROP TABLE IF EXISTS `rateio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rateio` (
-  `uidpk` int(11) NOT NULL,
+  `uidpk` int(11) NOT NULL AUTO_INCREMENT,
   `valor` double NOT NULL,
   `dt_criacao` datetime NOT NULL,
   `fk_rateio_conta_agua` int(11) NOT NULL,
@@ -174,7 +175,7 @@ DROP TABLE IF EXISTS `unidade`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `unidade` (
-  `uidpk` int(11) NOT NULL,
+  `uidpk` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   `percentual_rateio` double NOT NULL,

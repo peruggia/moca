@@ -13,6 +13,7 @@ var contaAgua = require('./routes/conta_agua');
 var unidade = require('./routes/unidade');
 var coletor = require('./routes/coletor');
 var condominio = require('./routes/condominio');
+var consumo = require('./routes/consumo');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.use('/conta_agua', contaAgua);
 app.use('/unidade', unidade);
 app.use('/coletor', coletor);
 app.use('/condominio', condominio);
+app.use('/consumo', consumo);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

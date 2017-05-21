@@ -13,13 +13,10 @@ block content
           tr
             th Nome
             th Endereço
+            th Data de criação
         tbody
-          tr
-            td ADFEG
-            td Donec rhoncus nisi eu nunc hendrerit, in tempor turpis tincidunt. Vivamus condimentum condimentum convallis.
-          tr
-            td AS83FC
-            td Donec rhoncus nisi eu nunc hendrerit, in tempor turpis tincidunt. Vivamus condimentum condimentum convallis.
-          tr
-            td FKMSHE
-            td Donec rhoncus nisi eu nunc hendrerit, in tempor turpis tincidunt. Vivamus condimentum condimentum convallis.
+          each condominio in condominios
+            tr
+              td=condominio.nome
+              td=condominio.endereco
+              td=condominio.dt_criacao_formatada

@@ -4,44 +4,25 @@ block content
   .row.justify-content-md-center.mt-4
     .col
       h1.mb-3 Condomínio - Incluir
+      if success
+        .alert.alert-success
+          strong Sucesso!
+          |  O condomínio foi registrado com sucesso
   form(method="post")
-  .row.mt-3.p-3.bg-faded.rounded
-      - var code = '';
-      .col
-        .form-group.row
-          - code = 'nome';
-          label.col-sm-2.col-form-label.text-right(for=code) Nome
-          .col-sm-10
-            input(type="text" class="form-control" id=code name=code placeholder="Ex: Praia Azul")
-        .form-group.row
-          - code = 'endereco';
-          label.col-sm-2.col-form-label.text-right(for=code) Endereço
-          .col-sm-10
-            input(type="text" class="form-control" id=code name=code placeholder="Ex: janeiro")
-        h6 Unidades:
-        .js-unidades
+    .row.mt-3.p-3.bg-faded.rounded
+        - var code = '';
+        .col
           .form-group.row
-            .col-sm-6
-              - code = 'unidade1';
-              select(class="form-control d-inline-block w-75" id=code name=code)
-                option(value='1234') AP 1003
-                option(value='1234') AP 205
-              button.btn.btn-danger.btn-sm.ml-2
-                i.fa.fa-trash
+            - code = 'nome';
+            label.col-sm-2.col-form-label.text-right(for=code) Nome
+            .col-sm-10
+              input(type="text" class="form-control" id=code name=code placeholder="Ex: Praia Azul")
           .form-group.row
-            .col-sm-6
-              - code = 'unidade2';
-              select(class="form-control d-inline-block w-75" id=code name=code)
-                option(value='1234') AP 1003
-                option(value='1234') AP 205
-              button.btn.btn-danger.btn-sm.ml-2
-                i.fa.fa-trash
-        button.btn.btn-link.mb-4
-          i.fa.fa-plus.mr-2
-          | Adicionar Unidade
-        br
-        
-        a(href="/condominio" class="btn btn-secondary mr-2") Voltar
-        button(type="submit" class="btn btn-primary")
-          i.fa.fa-floppy-o.mr-2
-          | Salvar
+            - code = 'endereco';
+            label.col-sm-2.col-form-label.text-right(for=code) Endereço
+            .col-sm-10
+              input(type="text" class="form-control" id=code name=code placeholder="Ex: janeiro")
+          a(href="/condominio" class="btn btn-secondary mr-2") Voltar
+          button(type="submit" class="btn btn-primary")
+            i.fa.fa-floppy-o.mr-2
+            | Salvar

@@ -1,14 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var connection = require('../connection');
+var pool = require('../pool');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  connection.query('SELECT u.*, c.nome AS condominio FROM unidade u, condominio c WHERE u.fk_unidade_condominio = c.uidpk', function (error, results, fields) {
-    if (error) { throw error; }
-    console.log(results);
-    res.render('unidade', {page: 'unidade', unidades: results});
+  pool.getConnection(function (err, connection) {
+    if (err) { throw err; }
+    connection.query('SELECT u.*, c.nome AS condominio FROM unidade u, condominio c WHERE u.fk_unidade_condominio = c.uidpk', function (error, results, fields) {
+      if (error) { throw error; }
+      console.log(results);
+      res.render('unidade', {page: 'unidade', unidades: results});
+    });
   });
 
 });
