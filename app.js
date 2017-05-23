@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
-var browserify = require('browserify-middleware');
 
 var login = require('./routes/login');
 var home = require('./routes/home');
@@ -21,12 +20,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// Browserify
-app.get('./js/', browserify('./public/javascripts/', {
-  cache: false,
-  precompile: true
-}));
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -37,7 +30,9 @@ app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
   indentedSyntax: true, // true = .sass and false = .scss
-  sourceMap: true
+  sourceMap: true,
+  debug: true,
+  outputStyle: 'compressed'
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
