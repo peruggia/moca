@@ -45,6 +45,12 @@ html
                     i.fa.fa-qrcode.mr-1
                     | Módulos Coletores
                     span(class="sr-only") (current)
+                - active = (page === 'consulta' ? 'active' : '');
+                li(class="nav-item ml-2" class!=active)
+                  a(class="nav-link" href="/consulta")
+                    i.fa.fa-bar-chart.mr-1
+                    | Consulta
+                    span(class="sr-only") (current)
     .container
       block content
     script(src='/javascripts/app.min.js')

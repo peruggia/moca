@@ -1,0 +1,20 @@
+extends layout_page
+
+block content
+  .row.justify-content-md-center.mt-4
+    .col
+      h1.mb-3 Consulta
+      form(method="post")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-right Tipo
+          - code = 'tipo';
+          .col-sm-10
+            .form-check.form-check-inline
+              label.form-check-label
+                input(type="radio" class="form-check-input" name=code value="residencia")
+                |  Residência
+            .form-check.form-check-inline
+              label.form-check-label
+                input(type="radio" class="form-check-input" name=code value="area_comum")
+                |  Área Comum
+      canvas(id="dashboard-total" style="width: 50%; height: 200px")
