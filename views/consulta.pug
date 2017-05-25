@@ -6,15 +6,23 @@ block content
       h1.mb-3 Consulta
       form(method="post")
         .form-group.row
-          label.col-sm-2.col-form-label.text-right Tipo
+          label.col-sm-1.col-form-label.text-right Tipo
           - code = 'tipo';
-          .col-sm-10
+          .col-sm-3
             .form-check.form-check-inline
               label.form-check-label
-                input(type="radio" class="form-check-input" name=code value="residencia")
-                |  Residência
+                input(type="radio" class="form-check-input" name=code value="detalhado")
+                |  Detalhado
             .form-check.form-check-inline
               label.form-check-label
-                input(type="radio" class="form-check-input" name=code value="area_comum")
-                |  Área Comum
+                input(type="radio" class="form-check-input" name=code value="total")
+                |  Total
+          - code = 'dt_inicio';
+          label.col-sm-1.col-form-label.text-right(for=code) Início
+          .col-sm-3
+            input(type="text" class="form-control" id=code name=code placeholder="05/10/2003 11:30")
+          - code = 'dt_fim';
+          label.col-sm-1.col-form-label.text-right(for=code) Fim
+          .col-sm-3
+            input(type="text" class="form-control" id=code name=code placeholder="10/12/2003 13:24")
       canvas(id="dashboard-total" style="width: 50%; height: 200px")

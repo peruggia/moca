@@ -73,8 +73,17 @@ if (dashboardTotalElement) {
         label: 'Apartamentos',
         data: [40, 45, 33],
         fill: false,
-        borderColor: '#11b0ff'
+        backgroundColor: 'rgba(54, 162, 235, 0.2)'
       }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
     }
   });
 }
