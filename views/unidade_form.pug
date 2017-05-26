@@ -4,69 +4,45 @@ block content
   .row.justify-content-md-center.mt-4
     .col
       h1.mb-3 Unidade - Incluir
+      if success
+        .alert.alert-success
+          strong Sucesso!
+          |  A unidade foi registrada com sucesso
   form(method="post")
-  .row.mt-3.p-3.bg-faded.rounded
-      - var code = '';
-      .col
-        .form-group.row
-          - code = 'nome';
-          label.col-sm-2.col-form-label.text-right(for=code) Nome
-          .col-sm-10
-            input(type="text" class="form-control" id=code name=code placeholder="Ex: Apartamento 203")
-        .form-group.row
-          - code = 'condominio';
-          label.col-sm-2.col-form-label.text-right(for=code) Condomínio
-          .col-sm-10
-            select(class="form-control" id=code name=code)
-              option(value='1234') Condomínio Vila da Praia
-        .form-group.row
-          - code = 'usuario';
-          label.col-sm-2.col-form-label.text-right(for=code) Responsável
-          .col-sm-10
-            select(class="form-control" id=code name=code)
-              option(value='1234') Josefina Eleonor
-        .form-group.row
-          label.col-sm-2.col-form-label.text-right Tipo
-          - code = 'tipo';
-          .col-sm-10
-            .form-check.form-check-inline
-              label.form-check-label
-                input(type="radio" class="form-check-input" name=code value="residencia")
-                |  Residência
-            .form-check.form-check-inline
-              label.form-check-label
-                input(type="radio" class="form-check-input" name=code value="area_comum")
-                |  Área Comum
-        .form-group.row
-          - code = 'percentual_rateio';
-          label.col-sm-2.col-form-label.text-right Rateio
-          .col-sm-3.input-group
-            input(type="number" class="form-control " id=code name=code placeholder="Ex: 120" value="100")
-            span.input-group-addon %
-        h6 Coletores:
-        .js-coletores
+    .row.mt-3.p-3.bg-faded.rounded
+        - var code = '';
+        .col
           .form-group.row
-            .col-sm-6
-              - code = 'coletor2';
-              select(class="form-control d-inline-block w-75" id=code name=code)
-                option(value='1234') C-005 - AP 1003
-                option(value='1234') C-006 - AP 205
-              button.btn.btn-danger.btn-sm.ml-2
-                i.fa.fa-trash
+            - code = 'nome';
+            label.col-sm-2.col-form-label.text-right(for=code) Nome
+            .col-sm-10
+              input(type="text" class="form-control" id=code name=code placeholder="Ex: Apartamento 203")
           .form-group.row
-            .col-sm-6
-              - code = 'coletor2';
-              select(class="form-control d-inline-block w-75" id=code name=code)
-                option(value='1234') C-005 - AP 1003
-                option(value='1234') C-006 - AP 205
-              button.btn.btn-danger.btn-sm.ml-2
-                i.fa.fa-trash
-        button.btn.btn-link.mb-4
-          i.fa.fa-plus.mr-2
-          | Adicionar Coletor
-        br
-
-        a(href="/unidade" class="btn btn-secondary mr-2") Voltar
-        button(type="submit" class="btn btn-primary")
-          i.fa.fa-floppy-o.mr-2
-          | Salvar
+            - code = 'condominioUidpk';
+            label.col-sm-2.col-form-label.text-right(for=code) Condomínio
+            .col-sm-10
+              select(class="form-control" id=code name=code)
+                each c in condominios
+                  option(value=c.uidpk)= c.nome
+          .form-group.row
+            label.col-sm-2.col-form-label.text-right Tipo
+            - code = 'tipo';
+            .col-sm-10
+              .form-check.form-check-inline
+                label.form-check-label
+                  input(type="radio" class="form-check-input" name=code value="residencia")
+                  |  Residência
+              .form-check.form-check-inline
+                label.form-check-label
+                  input(type="radio" class="form-check-input" name=code value="area_comum")
+                  |  Área Comum
+          .form-group.row
+            - code = 'percentualRateio';
+            label.col-sm-2.col-form-label.text-right Rateio
+            .col-sm-3.input-group
+              input(type="number" class="form-control " id=code name=code placeholder="Ex: 120" value="100")
+              span.input-group-addon %
+          a(href="/unidade" class="btn btn-secondary mr-2") Voltar
+          button(type="submit" class="btn btn-primary")
+            i.fa.fa-floppy-o.mr-2
+            | Salvar

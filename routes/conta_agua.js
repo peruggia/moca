@@ -15,7 +15,7 @@ var monthToNumber = {
   'outubro': 10,
   'novembro': 11,
   'dezembro': 12
-}
+};
 
 /* GET home page. */
 router.get('/', function(req, res) {

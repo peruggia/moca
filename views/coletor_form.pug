@@ -22,15 +22,16 @@ block content
           - code = 'condominio';
           label.col-sm-2.col-form-label.text-right(for=code) Condomínio
           .col-sm-10
-            select(class="form-control" id=code name=code)
-              option(value='1234') Condomínio Vila da Praia
+            select(class="form-control" id=code name=code onchange="window.location.href = '/coletor/incluir/' + this.value")
+              each c in condominios
+                option(value=c.uidpk)= c.nome
         .form-group.row
           - code = 'unidade';
           label.col-sm-2.col-form-label.text-right(for=code) Unidade
           .col-sm-10
             select(class="form-control" id=code name=code)
-              option(value='1234') AP 1003
-              option(value='1234') AP 1002
+              each c in unidades
+                option(value=c.uidpk)= c.nome
         
         a(href="/coletor" class="btn btn-secondary mr-2") Voltar
         button(type="submit" class="btn btn-primary")
