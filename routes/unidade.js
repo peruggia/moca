@@ -34,7 +34,9 @@ router.post('/incluir', function(req, res) {
       d.condominioUidpk
     ], function (error) {
       if (error) { throw error; }
-      loadFormData(res, true);
+      balanceamentoFatorRateio(d.condominioUidpk, function () {
+        loadFormData(res, true);
+      });
     });
   });
 });
@@ -60,6 +62,28 @@ function renderForm(res, success) {
   if (condominios && coletores) {
     res.render('unidade_form', {page: 'unidade', condominios: condominios, coletores: coletores, success: success});
   }
+}
+
+function balanceamentoFatorRateio(condominioUidpk, callback) {
+  var numUnidades = 0,
+    percentualRateioTotal = 0.0,
+    novoFatorRateio = 0.0;
+  connections.getTotalUnidades(condominioUidpk, function (err, result) {
+    numUnidades = parseInt(result[0].total);
+    connections.getTotalPercentualRateio(condominioUidpk, function (err, result) {
+      percentualRateioTotal = parseFloat(result[0].total);
+      connections.getUnidades(condominioUidpk, function (err, result) {
+        result.forEach(function (unidade) {
+          if (unidade.tipo === 'residencia') {
+            novoFatorRateio = (numUnidades * parseFloat(unidade.percentual_rateio)) / percentualRateioTotal;
+            unidade.percentual_rateio = novoFatorRateio;
+            connections.setUnidade(unidade, function () {});
+          }
+        });
+        callback();
+      });
+    });
+  });
 }
 
 module.exports = router;
