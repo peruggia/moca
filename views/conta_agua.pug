@@ -18,36 +18,15 @@ block content
             th Vencimento
             th(colspan=2) Valor
         tbody
-          tr
-            td ADFEG
-            td Janeiro
-            td 05/12/2016
-            td 31/12/2016
-            td 10/01/2017
-            td R$ 2.515,98
-            td
-              a(href='/conta_agua/rateio/1234' class='btn btn-info btn-sm')
-                i.fa.fa-money.mr-2
-                | Rateio
-          tr
-            td AS83FC
-            td Fevereiro
-            td 05/01/2017
-            td 31/01/2017
-            td 10/02/2017
-            td R$ 22.215,98
-            td
-              a(href='/conta_agua/rateio/1234' class='btn btn-info btn-sm')
-                i.fa.fa-money.mr-2
-                | Rateio
-          tr
-            td FKMSHE
-            td Março
-            td 05/02/2016
-            td 31/02/2016
-            td 10/03/2017
-            td R$ 1.715,98
-            td
-              a(href='/conta_agua/rateio/1234' class='btn btn-info btn-sm')
-                i.fa.fa-money.mr-2
-                | Rateio
+          each c in contas
+            tr
+              td=c.codigo
+              td=c.mes_referencia
+              td=c.dt_leitura_anterior
+              td=c.dt_fim_leitura
+              td=c.dt_ventimento
+              td=c.valor
+              td
+                a(href=`/conta_agua/rateio/${c.uidpk}` class='btn btn-info btn-sm')
+                  i.fa.fa-money.mr-2
+                  | Rateio

@@ -23,7 +23,10 @@ var contaAgua, consumos, consumoTotal;
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('conta_agua', {page: 'conta_agua'});
+  connections.getContasAgua(function (error, results) {
+    if (error) { throw error; }
+    res.render('conta_agua', {page: 'conta_agua', contas: results});
+  });
 });
 router.get('/incluir', function(req, res) {
   pool.getConnection(function (err, connection) {
@@ -36,7 +39,10 @@ router.get('/incluir', function(req, res) {
   });
 });
 router.get('/rateio/:contaAguaId', function(req, res) {
-  res.render('rateio', {page: 'conta_agua'});
+  connections.getRateios(req.params.contaAguaId, function (error, results) {
+    if (error) { throw error; }
+    res.render('rateio', {page: 'conta_agua', rateios: results});
+  });
 });
 
 // POSTS

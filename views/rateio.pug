@@ -14,12 +14,7 @@ block content
             th Nome da Unidade
             th Valor
         tbody
-          tr
-            td Apartamento 201
-            td R$ 31,20
-          tr
-            td Apartamento 205
-            td R$ 54,90
-          tr
-            td Jardim
-            td R$ 25,50
+          each r in rateios
+            tr
+              td=r.nome
+              td R$ #{r.valor}

@@ -36,6 +36,32 @@ module.exports = {
       });
     });
   },
+  getContasAgua: function (callback) {
+    pool.getConnection(function (err, connection) {
+      if (err) { throw err; }
+      var sql = `SELECT *,
+        DATE_FORMAT(dt_leitura_anterior, \'%d/%m/%Y\') as dt_leitura_anterior,
+        DATE_FORMAT(dt_fim_leitura, \'%d/%m/%Y\') as dt_fim_leitura,
+        DATE_FORMAT(dt_ventimento, \'%d/%m/%Y\') as dt_ventimento
+        FROM conta_agua`;
+      connection.query(sql, function (error, results) {
+        connection.release();
+        if (error) { throw error; }
+        callback(error, results);
+      });
+    });
+  },
+  getRateios: function (contaAguaId, callback) {
+    pool.getConnection(function (err, connection) {
+      if (err) { throw err; }
+      var sql = `SELECT r.*, u.nome FROM rateio r, unidade u WHERE r.fk_rateio_conta_agua = ${contaAguaId} AND r.fk_rateio_unidade = u.uidpk`;
+      connection.query(sql, function (error, results) {
+        connection.release();
+        if (error) { throw error; }
+        callback(error, results);
+      });
+    });
+  },
   getTotalUnidades: function (condominioUidpk, callback) {
     pool.getConnection(function (err, connection) {
       if (err) { throw err; }
