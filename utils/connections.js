@@ -155,5 +155,20 @@ module.exports = {
         callback(error, results);
       });
     });
+  },
+  getDashboard: function (callback) {
+    pool.getConnection(function (err, connection) {
+      if (err) { throw err; }
+      var sql = `
+        SELECT c.*, u.nome, DATE_FORMAT(c.dt_criacao, '%H:%i:%s') time FROM consumo c, unidade u
+        WHERE c.dt_criacao >= NOW() - INTERVAL 1 DAY
+        AND c.fk_consumo_unidade = u.uidpk
+      `;
+      connection.query(sql, function (error, results) {
+        connection.release();
+        if (error) { throw error; }
+        callback(error, results);
+      });
+    });
   }
 };
