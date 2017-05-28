@@ -65,6 +65,7 @@ if (dashboardElement) {
       }
     }
   });
+  updateChart(chart);
   window.setInterval(function () {
     updateChart(chart);
   }, 10000);
