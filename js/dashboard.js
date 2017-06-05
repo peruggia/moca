@@ -35,7 +35,7 @@ function updateChart(chart) {
           label: consumo.nome,
           data: [consumo.quantidade],
           fill: false,
-          borderColor: getRandomColor()
+          borderColor: '#FF0000'
         });
       } else {
         dataset[index].data.push(consumo.quantidade);

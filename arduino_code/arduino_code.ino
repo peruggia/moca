@@ -74,6 +74,7 @@ void useInterrupt(boolean v) {
 // ------------------------------------------ Config HTTP Server
 // Quantidade lida
 double quantidade = 0;
+double quantidadeToSend = 0;
 // Serial desse sensor
 String serial = "MDC00001";
 
@@ -154,6 +155,7 @@ void httpRequest() {
     lastConnectionTime = millis();
     timer = 0;
     pulses = 0;
+    quantidadeToSend = 0;
     //Serial.flush();
   } else {
     // if you couldn't make a connection:
@@ -162,7 +164,7 @@ void httpRequest() {
 }
 
 String getQuantityFormatedToSend() {
-  String quantidadeString = String(quantidade);
+  String quantidadeString = String(quantidadeToSend);
   quantidadeString.replace(".", "_");
   return quantidadeString;
 }
@@ -177,8 +179,10 @@ void calculaQuantidadeLida() {
   // Liters = (Frequency (Pulses/second) / 7.5) * time elapsed (seconds) / 60
   // Liters = Pulses / (7.5 * 60)
   quantidade = pulses;
-  quantidade /= 7.5;
+  quantidade /= 5.5;
   quantidade /= 60.0;
+  quantidadeToSend += quantidade;
+  quantidade = 0;
   timer += 1;
 
   /*
@@ -188,7 +192,7 @@ void calculaQuantidadeLida() {
     liters -= 6;
     liters /= 60.0;
   */
-  Serial.print(quantidade); Serial.println(" Liters");
+  Serial.print(quantidadeToSend); Serial.println(" Liters");
   Serial.print("Contador: "); Serial.println(timer);
 }
 
