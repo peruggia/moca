@@ -15,4 +15,12 @@ router.get('/dashboard', function(req, res) {
   });
 });
 
+router.post('/', function(req, res) {
+  console.log(req.body);
+  connections.getRelatorio(req.body, function (error, results) {
+    if (error) { throw error; }
+    res.render('consulta', {page: 'consulta', plotData: JSON.stringify(req.body)});
+  });
+});
+
 module.exports = router;

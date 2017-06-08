@@ -1,6 +1,8 @@
 extends layout_page
 
 block content
+  script
+    | var plotData = !{plotData}
   .row.justify-content-md-center.mt-4
     .col
       h1.mb-3 Consulta
@@ -11,18 +13,20 @@ block content
           .col-sm-3
             .form-check.form-check-inline
               label.form-check-label
-                input(type="radio" class="form-check-input" name=code value="detalhado")
+                input(type="radio" checked="checked" class="form-check-input" name=code value="line")
                 |  Detalhado
             .form-check.form-check-inline
               label.form-check-label
-                input(type="radio" class="form-check-input" name=code value="total")
+                input(type="radio" class="form-check-input" name=code value="bar")
                 |  Total
-          - code = 'dt_inicio';
+          - code = 'dtInicio';
           label.col-sm-1.col-form-label.text-right(for=code) Início
-          .col-sm-3
+          .col-sm-2
             input(type="text" class="form-control" id=code name=code placeholder="05/10/2003 11:30")
-          - code = 'dt_fim';
+          - code = 'dtFim';
           label.col-sm-1.col-form-label.text-right(for=code) Fim
-          .col-sm-3
+          .col-sm-2
             input(type="text" class="form-control" id=code name=code placeholder="10/12/2003 13:24")
+          .col-sm-2
+            button(type="submit" class="btn btn-primary") Buscar
       canvas(id="dashboard-total" style="width: 50%; height: 200px")

@@ -81,7 +81,8 @@ String serial = "MDC00001";
 // assign a MAC address for the ethernet controller.
 // fill in your address here:
 byte mac[] = { 0x90, 0xA2, 0xDA, 0x0F, 0x81, 0x92 };
-char server[] = "192.168.0.20";
+//char server[] = "192.168.0.20";
+char server[] = "192.168.2.1";
 
 // Set the static IP address to use if the DHCP fails to assign
 IPAddress ip(192, 168, 0, 21);
