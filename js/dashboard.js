@@ -16,35 +16,59 @@ function getRandomColor() {
   return color;
 }
 
-function updateChart(chart) {
-  $.get('/consulta/dashboard', function (consumos) {
-    console.log(consumos);
-    var times = [],
-      dataset = [],
-      index;
-    consumos.forEach(function (consumo) {
-      times.push(consumo.time);
-      index = -1;
-      dataset.forEach(function (currentDataset, i) {
-        if (currentDataset.label === consumo.nome) {
-          index = i;
-        }
-      });
-      if (index < 0) {
-        dataset.push({
-          label: consumo.nome,
-          data: [consumo.quantidade],
-          fill: false,
-          borderColor: '#FF0000'
-        });
-      } else {
-        dataset[index].data.push(consumo.quantidade);
+function updateChart(chart, consumos) {
+  console.log(consumos);
+  var times = [],
+    dataset = [],
+    index;
+  consumos.forEach(function (consumo) {
+    times.push(consumo.time);
+    index = -1;
+    dataset.forEach(function (currentDataset, i) {
+      if (currentDataset.label === consumo.nome) {
+        index = i;
       }
     });
-    console.log(times, dataset);
-    chart.data.labels = times;
-    chart.data.datasets = dataset;
-    chart.update();
+    if (index < 0) {
+      dataset.push({
+        label: consumo.nome,
+        data: [consumo.quantidade],
+        fill: false,
+        borderColor: '#FF0000'
+      });
+    } else {
+      dataset[index].data.push(consumo.quantidade);
+    }
+  });
+  console.log(times, dataset);
+  chart.data.labels = times;
+  chart.data.datasets = dataset;
+  chart.update();
+}
+
+function updateChartTotal(chart, consumos) {
+  console.log(consumos);
+  var times = [],
+    dataset = [],
+    index;
+  consumos.forEach(function (consumo) {
+    times.push(consumo.nome);
+    dataset.push({
+      label: consumo.nome,
+      data: [consumo.total],
+      fill: true,
+      backgroundColor: '#FF0000'
+    });
+  });
+  console.log(times, dataset);
+  chart.data.labels = times;
+  chart.data.datasets = dataset;
+  chart.update();
+}
+
+function loadChartData(chart) {
+  $.get('/consulta/dashboard', function (consumos) {
+    updateChart(chart, consumos);
   });
 }
 
@@ -65,29 +89,21 @@ if (dashboardElement) {
       }
     }
   });
-  updateChart(chart);
+  loadChartData(chart);
   window.setInterval(function () {
-    updateChart(chart);
+    loadChartData(chart);
   }, 10000);
 }
 
 if (dashboardTotalElement) {
-  new Chart(dashboardTotalElement, {
-    type: 'bar',
+  if (!plotType || !plotData) {
+    return;
+  }
+  var chart = new Chart(dashboardTotalElement, {
+    type: plotType,
     data: {
-      labels: (function () {
-        var labels = [];
-        ['Ap203', 'Ap204', 'Ap205'].forEach(function (i) {
-          labels.push(i);
-        });
-        return labels;
-      }()),
-      datasets: [{
-        label: 'Apartamentos',
-        data: [40, 45, 33],
-        fill: false,
-        backgroundColor: 'rgba(54, 162, 235, 0.2)'
-      }]
+      labels: [],
+      datasets: []
     },
     options: {
       scales: {
@@ -99,4 +115,9 @@ if (dashboardTotalElement) {
       }
     }
   });
+  if (plotType === 'line') {
+    updateChart(chart, plotData);
+  } else {
+    updateChartTotal(chart, plotData);
+  }
 }

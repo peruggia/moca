@@ -2,7 +2,7 @@ extends layout_page
 
 block content
   script
-    | var plotData = !{plotData}
+    | var plotData = !{plotData}; var plotType = '!{plotType}';
   .row.justify-content-md-center.mt-4
     .col
       h1.mb-3 Consulta
@@ -22,11 +22,11 @@ block content
           - code = 'dtInicio';
           label.col-sm-1.col-form-label.text-right(for=code) Início
           .col-sm-2
-            input(type="text" class="form-control" id=code name=code placeholder="05/10/2003 11:30")
+            input(type="text" class="form-control" id=code name=code placeholder="2017-06-08 10:00")
           - code = 'dtFim';
           label.col-sm-1.col-form-label.text-right(for=code) Fim
           .col-sm-2
-            input(type="text" class="form-control" id=code name=code placeholder="10/12/2003 13:24")
+            input(type="text" class="form-control" id=code name=code placeholder="2017-06-08 10:00")
           .col-sm-2
             button(type="submit" class="btn btn-primary") Buscar
       canvas(id="dashboard-total" style="width: 50%; height: 200px")

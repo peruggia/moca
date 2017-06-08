@@ -4,7 +4,11 @@ var connections = require('../utils/connections');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('consulta', {page: 'consulta'});
+  res.render('consulta', {
+    page: 'consulta',
+    plotData: '[]',
+    plotType: 'line'
+  });
 });
 
 router.get('/dashboard', function(req, res) {
@@ -19,7 +23,10 @@ router.post('/', function(req, res) {
   console.log(req.body);
   connections.getRelatorio(req.body, function (error, results) {
     if (error) { throw error; }
-    res.render('consulta', {page: 'consulta', plotData: JSON.stringify(req.body)});
+    res.render('consulta', {
+      page: 'consulta',
+      plotData: JSON.stringify(results),
+      plotType: req.body.tipo});
   });
 });
 

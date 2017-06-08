@@ -170,5 +170,32 @@ module.exports = {
         callback(error, results);
       });
     });
+  },
+  getRelatorio: function (data, callback) {
+    pool.getConnection(function (err, connection) {
+      if (err) { throw err; }
+      if (data.tipo === 'line') {
+        var sql = `
+          SELECT c.*, u.nome, DATE_FORMAT(c.dt_criacao, '%H:%i:%s') time FROM consumo c, unidade u
+          WHERE c.dt_criacao >= '${data.dtInicio}'
+          AND c.dt_criacao <= '${data.dtFim}'
+          AND c.fk_consumo_unidade = u.uidpk
+        `;
+      } else {
+        var sql = `
+          SELECT u.nome, SUM(c.quantidade) total FROM consumo c, unidade u
+          WHERE c.dt_criacao >= '${data.dtInicio}'
+          AND c.dt_criacao <= '${data.dtFim}'
+          AND c.fk_consumo_unidade = u.uidpk
+          GROUP BY fk_consumo_unidade
+        `;
+      }
+
+      connection.query(sql, function (error, results) {
+        connection.release();
+        if (error) { throw error; }
+        callback(error, results);
+      });
+    });
   }
 };
